@@ -73,9 +73,18 @@ fun mainMenu() = readNextInt(
 //------------------------------------
 fun addComic() {
     val comicTitle = readNextLine("Enter a title for the comic: ")
-    val comicPriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
-    val comicCategory = readNextLine("Enter a category for the comic: ")
-    val isAdded = comicAPI.add(Comic(comicTitle = comicTitle, comicPriority = comicPriority, comicCategory = comicCategory))
+    val comicWriter = readNextLine("Enter the writer for the comic: ")
+    val comicArtist = readNextLine("Enter the artist for the comic: ")
+    val comicPublisher = readNextLine("Enter the publisher for the comic: ")
+    val isComicSold = readNextChar("Is the comic sold? (Y/N): ")
+
+    val isAdded = comicAPI.add(Comic(
+        comicTitle = comicTitle,
+        comicWriter = comicWriter,
+        comicArtist = comicArtist,
+        comicPublisher = comicPublisher,
+        isComicSold = isComicSold
+    ))
 
     if (isAdded) {
         println("Added Successfully")
