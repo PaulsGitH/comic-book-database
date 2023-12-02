@@ -2,13 +2,14 @@ package models
 
 import utils.Utilities
 
-data class Comic(var comicId: Int = 0,
-                 var comicTitle: String,
-                 var comicWriter: String,
-                 var comicArtist: String,
-                 var comicPublisher: String,
-                 var isComicSold: Boolean = false,
-                 var issues : MutableSet<Issue> = mutableSetOf())
+data class Comic(
+    var comicId: Int = 0,
+    var comicTitle: String,
+    var comicWriter: String,
+    var comicArtist: String,
+    var comicPublisher: String,
+    var isComicSold: Boolean = false,
+    var issues: MutableSet<Issue> = mutableSetOf())
 {
     private var lastIssueId = 0
     private fun getIssueId() = lastIssueId++

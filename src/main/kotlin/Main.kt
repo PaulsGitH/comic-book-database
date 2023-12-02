@@ -17,14 +17,14 @@ fun runMenu() {
             2 -> listComics()
             3 -> updateComic()
             4 -> deleteComic()
-            5 -> archiveComic()
-            6 -> addItemToComic()
-            7 -> updateItemContentsInComic()
-            8 -> deleteAnItem()
-            9 -> markItemStatus()
+            5 -> soldComic()
+            6 -> addIssueToComic()
+            7 -> updateIssueDetailsInComic()
+            8 -> deleteAnIssue()
+            9 -> markIssueStatus()
             10 -> searchComics()
-            15 -> searchItems()
-            16 -> listToDoItems()
+            15 -> searchIssues()
+            16 -> listInspectIssues()
             0 -> exitApp()
             else -> println("Invalid menu choice: $option")
         }
@@ -73,14 +73,21 @@ fun mainMenu() = readNextInt(
 //------------------------------------
 fun addComic() {
     val comicTitle = readNextLine("Enter a title for the comic: ")
-    val comicPriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
-    val comicCategory = readNextLine("Enter a category for the comic: ")
-    val isAdded = comicAPI.add(Comic(comicTitle = comicTitle, comicPriority = comicPriority, comicCategory = comicCategory))
+    val comicWriter = readNextLine("Enter the writer for the comic: ")
+    val comicArtist = readNextLine("Enter the artist for the comic: ")
+    val comicPublisher = readNextLine("Enter the publisher for the comic: ")
+
+    val isAdded = comicAPI.add(Comic(
+        comicTitle = comicTitle,
+        comicWriter = comicWriter,
+        comicArtist = comicArtist,
+        comicPublisher = comicPublisher
+    ))
 
     if (isAdded) {
-        println("Added Successfully")
+        println("Successfully added comic")
     } else {
-        println("Add Failed")
+        println("Adding comic failed")
     }
 }
 
@@ -114,21 +121,27 @@ fun listSoldComics() = println(comicAPI.listSoldComics())
 fun updateComic() {
     listComics()
     if (comicAPI.numberOfComics() > 0) {
-        // only ask the user to choose the note if notes exist
-        val id = readNextInt("Enter the id of the note to update: ")
+        // only ask the user to choose the comic if comics exist
+        val id = readNextInt("Enter the id of the comic to update: ")
         if (comicAPI.findComic(id) != null) {
-            val comicTitle = readNextLine("Enter a title for the note: ")
-            val comicPriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
-            val comicCategory = readNextLine("Enter a category for the note: ")
+            val comicTitle = readNextLine("Enter a title for the comic: ")
+            val comicWriter = readNextLine("Enter the writer for the comic: ")
+            val comicArtist = readNextLine("Enter the artist for the comic: ")
+            val comicPublisher = readNextLine("Enter the publisher for the comic: ")
 
-            // pass the index of the note and the new note details to NoteAPI for updating and check for success.
-            if (comicAPI.update(id, Comic(0, comicTitle, comicPriority, comicCategory, false))){
+            // pass the index of the comic and the new comic details to ComicAPI for updating and check for success.
+            if (comicAPI.update(id, Comic(
+                    comicTitle = comicTitle,
+                    comicWriter = comicWriter,
+                    comicArtist = comicArtist,
+                    comicPublisher = comicPublisher,
+                ))) {
                 println("Update Successful")
             } else {
                 println("Update Failed")
             }
         } else {
-            println("There is no comic for this index number")
+            println("There is no comic with this id")
         }
     }
 }
