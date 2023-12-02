@@ -163,14 +163,30 @@ fun soldComic() {
 }
 
 //-------------------------------------------
-//ITEM MENU (only available for active notes)
+//ISSUE MENU (only available for available comics)
 //-------------------------------------------
 private fun addIssueToComic() {
     val comic: Comic? = askUserToChooseAvailableComic()
     if (comic != null) {
-        if (comic.addIssue(Issue(issueContents = readNextLine("\t Issue Contents: "))))
+        val dateOfPublication = readNextLine("\t Date of Publication: ")
+        val rrp = readNextInt("\t RRP: ")
+        val currentMarketValue = readNextInt("\t Current Market Value: ")
+        val rarity = readNextLine("\t Rarity: ")
+        val condition = readNextLine("\t Condition: ")
+
+        val newIssue = Issue(
+            dateOfPublication = dateOfPublication,
+            rrp = rrp,
+            currentMarketValue = currentMarketValue,
+            rarity = rarity,
+            condition = condition
+        )
+
+        if (comic.addIssue(newIssue)) {
             println("Add Successful!")
-        else println("Add NOT Successful")
+        } else {
+            println("Add NOT Successful")
+        }
     }
 }
 
