@@ -274,7 +274,7 @@ fun searchComics() {
 //------------------------------------
 fun searchIssues() {
     val searchDetails = readNextLine("Enter the issue contents to search by: ")
-    val searchResults = comicAPI.searchIssueByDetails(searchDetails)
+    val searchResults = comicAPI.searchIssueByRarity(searchDetails)
     if (searchResults.isEmpty()) {
         println("No issues found")
     } else {
