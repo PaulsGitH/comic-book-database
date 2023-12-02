@@ -163,14 +163,30 @@ fun soldComic() {
 }
 
 //-------------------------------------------
-//ITEM MENU (only available for active notes)
+//ISSUE MENU (only available for available comics)
 //-------------------------------------------
 private fun addIssueToComic() {
     val comic: Comic? = askUserToChooseAvailableComic()
     if (comic != null) {
-        if (comic.addIssue(Issue(issueContents = readNextLine("\t Issue Contents: "))))
+        val dateOfPublication = readNextLine("\t Date of Publication: ")
+        val rrp = readNextInt("\t RRP: ")
+        val currentMarketValue = readNextInt("\t Current Market Value: ")
+        val rarity = readNextLine("\t Rarity: ")
+        val condition = readNextLine("\t Condition: ")
+
+        val newIssue = Issue(
+            dateOfPublication = dateOfPublication,
+            rrp = rrp,
+            currentMarketValue = currentMarketValue,
+            rarity = rarity,
+            condition = condition
+        )
+
+        if (comic.addIssue(newIssue)) {
             println("Add Successful!")
-        else println("Add NOT Successful")
+        } else {
+            println("Add NOT Successful")
+        }
     }
 }
 
@@ -179,8 +195,22 @@ fun updateIssueDetailsInComic() {
     if (comic != null) {
         val issue: Issue? = askUserToChooseIssue(comic)
         if (issue != null) {
-            val newDetails = readNextLine("Enter new details: ")
-            if (comic.update(issue.issueId, Issue(issueDetails = newDetails))) {
+            val newDateOfPublication = readNextLine("Enter new Date of Publication: ")
+            val newRRP = readNextInt("Enter new RRP: ")
+            val newRarity = readNextLine("Enter new Rarity: ")
+            val newCurrentMarketValue = readNextInt("Enter new market value")
+            val newCondition = readNextLine("Enter new Condition: ")
+
+            val updatedIssue = Issue(
+                issueId = issue.issueId,
+                dateOfPublication = newDateOfPublication,
+                rrp = newRRP,
+                currentMarketValue = newCurrentMarketValue,
+                rarity = newRarity,
+                condition = newCondition
+            )
+
+            if (comic.update(issue.issueId, updatedIssue)) {
                 println("Issue details updated")
             } else {
                 println("Issue details NOT updated")
@@ -244,7 +274,7 @@ fun searchComics() {
 //------------------------------------
 fun searchIssues() {
     val searchDetails = readNextLine("Enter the issue contents to search by: ")
-    val searchResults = comicAPI.searchIssueByDetails(searchDetails)
+    val searchResults = comicAPI.searchIssueByRarity(searchDetails)
     if (searchResults.isEmpty()) {
         println("No issues found")
     } else {

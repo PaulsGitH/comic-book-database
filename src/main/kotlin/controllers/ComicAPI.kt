@@ -83,13 +83,13 @@ class ComicAPI() {
             comics.filter { comic -> comic.comicTitle.contains(searchString, ignoreCase = true) }
         )
 
-    fun searchIssueByDetails(searchString: String): String {
+    fun searchIssueByRarity(searchString: String): String {
         return if (numberOfComics() == 0) "No comics stored"
         else {
             var listOfComics = ""
             for (comic in comics) {
                 for (issue in comic.issues) {
-                    if (issue.issueContents.contains(searchString, ignoreCase = true)) {
+                    if (issue.rarity.contains(searchString, ignoreCase = true)) {
                         listOfComics += "${comic.comicId}: ${comic.comicTitle} \n\t${issue}\n"
                     }
                 }
@@ -109,7 +109,7 @@ class ComicAPI() {
              for (comic in comics) {
                  for (issue in comic.issues) {
                      if (!issue.isIssueDocumented) {
-                         listOfInspectIssues += comic.comicTitle + ": " + issue.issueContents + "\n"
+                         listOfInspectIssues += comic.comicTitle + ": " + issue.condition + "\n"
                      }
                  }
              }
