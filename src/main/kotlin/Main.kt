@@ -76,14 +76,12 @@ fun addComic() {
     val comicWriter = readNextLine("Enter the writer for the comic: ")
     val comicArtist = readNextLine("Enter the artist for the comic: ")
     val comicPublisher = readNextLine("Enter the publisher for the comic: ")
-    val isComicSold = readNextChar("Is the comic sold? (Y/N): ")
 
     val isAdded = comicAPI.add(Comic(
         comicTitle = comicTitle,
         comicWriter = comicWriter,
         comicArtist = comicArtist,
-        comicPublisher = comicPublisher,
-        isComicSold = isComicSold
+        comicPublisher = comicPublisher
     ))
 
     if (isAdded) {

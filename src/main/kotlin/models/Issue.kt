@@ -10,7 +10,7 @@ data class Issue (var issueId: Int = 0,
 {
 
     override fun toString(): String {
-        val status = if (isIssueDocumented) "Complete" else "TODO"
+        val status = if (isIssueDocumented) "Fully Documented" else "Documentation in Progress"
         return "$issueId: $dateOfPublication, RRP: $rrp, Current Market Value: $currentMarketValue, Rarity: $rarity, Condition: $condition ($status)"
     }
 

@@ -8,7 +8,7 @@ data class Comic(
     var comicWriter: String,
     var comicArtist: String,
     var comicPublisher: String,
-    var isComicSold: Char = false,
+    var isComicSold: Boolean = false,
     var issues: MutableSet<Issue> = mutableSetOf())
 {
     private var lastIssueId = 0
