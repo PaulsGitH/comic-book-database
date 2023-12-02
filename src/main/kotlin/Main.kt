@@ -195,8 +195,22 @@ fun updateIssueDetailsInComic() {
     if (comic != null) {
         val issue: Issue? = askUserToChooseIssue(comic)
         if (issue != null) {
-            val newDetails = readNextLine("Enter new details: ")
-            if (comic.update(issue.issueId, Issue(issueDetails = newDetails))) {
+            val newDateOfPublication = readNextLine("Enter new Date of Publication: ")
+            val newRRP = readNextInt("Enter new RRP: ")
+            val newRarity = readNextLine("Enter new Rarity: ")
+            val newCurrentMarketValue = readNextInt("Enter new market value")
+            val newCondition = readNextLine("Enter new Condition: ")
+
+            val updatedIssue = Issue(
+                issueId = issue.issueId,
+                dateOfPublication = newDateOfPublication,
+                rrp = newRRP,
+                currentMarketValue = newCurrentMarketValue,
+                rarity = newRarity,
+                condition = newCondition
+            )
+
+            if (comic.update(issue.issueId, updatedIssue)) {
                 println("Issue details updated")
             } else {
                 println("Issue details NOT updated")

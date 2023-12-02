@@ -31,8 +31,8 @@ data class Comic(var comicId: Int = 0,
     fun update(id: Int, newIssue : Issue): Boolean {
         val foundIssue = findOne(id)
 
-        //if the object exists, use the details passed in the newItem parameter to
-        //update the found object in the Set
+        //if the object exists, use the details passed in the newIssue parameter to
+        //update the found issue in the Set
         if (foundIssue != null){
             foundIssue.dateOfPublication = newIssue.dateOfPublication
             foundIssue.rrp = newIssue.rrp
