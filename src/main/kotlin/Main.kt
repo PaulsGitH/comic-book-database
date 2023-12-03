@@ -16,8 +16,15 @@ import kotlin.system.exitProcess
 private val comicAPI = ComicAPI(YAMLSerializer(File("comics.yaml")))
 private val logger = KotlinLogging.logger {}
 
+/**
+ * Main entry point for the Comic Application.
+ * Initializes the [ComicAPI], sets up the menu, and enters a loop to execute user-selected actions.
+ */
 fun main() = runMenu()
-
+/**
+ * Runs the main menu loop for the Comic Application.
+ * Displays the menu, reads user input, and executes corresponding actions until the user chooses to exit.
+ */
 fun runMenu() {
     do {
         when (val option = mainMenu()) {
@@ -41,7 +48,10 @@ fun runMenu() {
         }
     } while (true)
 }
-
+/**
+ * Displays the main menu and reads the user's menu choice.
+ * @return The user's menu choice as an integer.
+ */
 fun mainMenu() = readNextInt(
         """ 
          > -----------------------------------------------------  
@@ -80,8 +90,12 @@ fun mainMenu() = readNextInt(
     )
 
 //------------------------------------
-//NOTE MENU
+// MENU
 //------------------------------------
+/**
+ * Adds a new comic to the application.
+ * Reads user input for comic details and uses [ComicAPI] to add the comic.
+ */
 fun addComic() {
     logger.info { "addComic() function invoked" }
     val comicTitle = readNextLine("Enter Comic series title: ")
@@ -103,7 +117,10 @@ fun addComic() {
     }
 }
 
-
+/**
+ * Lists comics based on user's choice (all, sold, or available).
+ * Reads user input and calls the appropriate [ComicAPI] function.
+ */
 fun listComics() {
     logger.info { "listComics() function invoked" }
     if (comicAPI.numberOfComics() > 0) {
@@ -125,7 +142,10 @@ fun listComics() {
         println("Option Invalid - No notes stored")
     }
 }
-
+/**
+ * Searches for comics based on user's choice (title, writer, artist, publisher).
+ * Reads user input and calls the appropriate [ComicAPI] function.
+ */
 fun searchComics() {
     logger.info { "searchComics() function invoked" }
     if (comicAPI.numberOfComics() > 0) {
@@ -151,7 +171,10 @@ fun searchComics() {
         println("Option Invalid - No notes stored")
     }
 }
-
+/**
+ * Searches for issues based on user's choice (rarity, condition, publication date).
+ * Reads user input and calls the appropriate [ComicAPI] function.
+ */
 fun searchIssues() {
     logger.info { "searchIssues() function invoked" }
     if (comicAPI.numberOfComics() > 0) {
@@ -180,7 +203,10 @@ fun listAllComics() = println(comicAPI.listAllComics())
 fun listAvailableComics() = println(comicAPI.listAvailableComics())
 fun listSoldComics() = println(comicAPI.listSoldComics())
 fun countTotalComics() = println(comicAPI.comicTotal())
-
+/**
+ * Updates the details of a comic.
+ * Displays the list of comics, reads user input for the comic to update, and updates using [ComicAPI].
+ */
 fun updateComic() {
     logger.info { "updateComic() function invoked" }
     listComics()
@@ -209,7 +235,10 @@ fun updateComic() {
         }
     }
 }
-
+/**
+ * Deletes a comic.
+ * Displays the list of comics, reads user input for the comic to delete, and deletes using [ComicAPI].
+ */
 fun deleteComic() {
     logger.info { "deleteComic() function invoked" }
     listComics()
@@ -225,7 +254,10 @@ fun deleteComic() {
         }
     }
 }
-
+/**
+ * Marks a comic as sold.
+ * Displays the list of available comics, reads user input for the comic to mark as sold, and archives using [ComicAPI].
+ */
 fun soldComic() {
     logger.info { "soldComic() function invoked" }
     listAvailableComics()
@@ -321,7 +353,10 @@ fun deleteAnIssue() {
         }
     }
 }
-
+/**
+ * Archives an issue in a comic by marking its inspection status.
+ * Displays the list of comics, reads user input for the comic and issue to mark, and updates using [ComicAPI].
+ */
 fun markIssueStatus() {
     logger.info { "markIssueStatus() function invoked" }
     val comic: Comic? = askUserToChooseComic()
@@ -431,7 +466,10 @@ fun listInspectIssues(){
     println(comicAPI.listInspectIssues())
 }
 
-
+/**
+ * Exits the Comic Application.
+ * Displays a farewell message and terminates the program.
+ */
 //------------------------------------
 // Exit App
 //------------------------------------
@@ -444,7 +482,11 @@ fun exitApp() {
 //------------------------------------
 //HELPER FUNCTIONS
 //------------------------------------
-
+/**
+ * Asks the user to choose a comic from the list.
+ * Displays the list of all comics and reads user input for the chosen comic.
+ * @return The chosen [Comic] or null if the input is invalid.
+ */
 private fun askUserToChooseComic(): Comic? {
     logger.info { "askUserToChooseComic() function invoked" }
     listAllComics()  // Use listAllComics to display all comics
@@ -458,7 +500,11 @@ private fun askUserToChooseComic(): Comic? {
     }
     return null
 }
-
+/**
+ * Asks the user to choose an issue from a comic.
+ * Displays the list of issues for the chosen comic and reads user input for the chosen issue.
+ * @return The chosen [Issue] or null if the input is invalid or no issues are available.
+ */
 private fun askUserToChooseIssue(comic: Comic): Issue? {
     logger.info { "askUserToChooseIssue() function invoked" }
     if (comic.numberOfIssues() > 0) {
@@ -470,7 +516,10 @@ private fun askUserToChooseIssue(comic: Comic): Issue? {
         return null
     }
 }
-
+/**
+ * Saves the current state of the application to a file using [ComicAPI].
+ * Handles potential exceptions and prints an error message if saving fails.
+ */
 fun save() {
     logger.info { "save() function invoked" }
     try {
@@ -479,7 +528,10 @@ fun save() {
         System.err.println("Error writing to file: $e")
     }
 }
-
+/**
+ * Loads the previously saved state of the application from a file using [ComicAPI].
+ * Handles potential exceptions and prints an error message if loading fails.
+ */
 fun load() {
     logger.info { "load() function invoked" }
     try {
