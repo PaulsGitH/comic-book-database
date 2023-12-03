@@ -22,19 +22,19 @@ fun runMenu() {
     do {
         when (val option = mainMenu()) {
             1 -> addComic()
-            2 -> listComics()
-            3 -> updateComic()
-            4 -> deleteComic()
-            5 -> soldComic()
-            6 -> addIssueToComic()
-            7 -> updateIssueDetailsInComic()
-            8 -> deleteAnIssue()
-            9 -> markIssueStatus()
-            10 -> searchComics()
-            11 -> save()
-            12 -> load()
-            15 -> searchIssues()
-            16 -> listInspectIssues()
+            3 -> listComics()
+            4 -> updateComic()
+            5 -> deleteComic()
+            6 -> soldComic()
+            7 -> addIssueToComic()
+            8 -> updateIssueDetailsInComic()
+            9 -> deleteAnIssue()
+            10 -> markIssueStatus()
+            11 -> searchComics()
+            12 -> save()
+            13 -> load()
+            14 -> searchIssues()
+            15 -> listInspectIssues()
             0 -> exitApp()
             else -> println("Invalid menu choice: $option")
         }
@@ -48,21 +48,22 @@ fun mainMenu() = readNextInt(
          > -----------------------------------------------------  
          > | NOTE MENU                                         |
          > |   1) Add a comic                                  |
-         > |   2) List notes                                   |
-         > |   3) Update a note                                |
-         > |   4) Delete a note                                |
-         > |   5) Archive a note                               |
+         > |   2) Add Available comic                          |
+         > |   3) List notes                                   |
+         > |   4) Update a note                                |
+         > |   5) Delete a note                                |
+         > |   6) Archive a note                               |
          > -----------------------------------------------------  
          > | ITEM MENU                                         | 
-         > |   6) Add item to a note                           |
-         > |   7) Update item contents on a note               |
-         > |   8) Delete item from a note                      |
-         > |   9) Mark item as complete/todo                   | 
+         > |   7) Add item to a note                           |
+         > |   8) Update item contents on a note               |
+         > |   9) Delete item from a note                      |
+         > |   10) Mark item as complete/todo                  | 
          > -----------------------------------------------------  
          > | REPORT MENU FOR NOTES                             | 
-         > |   10) Search for all notes (by note title)        |
-         > |   11) Save stored information for comic and issue |
-         > |   12) Load stored information for comic and issue |
+         > |   11) Search for all notes (by note title)        |
+         > |   12) Save stored information for comic and issue |
+         > |   13) Load stored information for comic and issue |
          > |   13) .....                                       |
          > |   14) .....                                       |
          > -----------------------------------------------------  
@@ -82,7 +83,7 @@ fun mainMenu() = readNextInt(
 //NOTE MENU
 //------------------------------------
 fun addComic() {
-    val comicTitle = readNextLine("Enter a title for the comic: ")
+    val comicTitle = readNextLine("Enter Comic series title: ")
     val comicWriter = readNextLine("Enter the writer for the comic: ")
     val comicArtist = readNextLine("Enter the artist for the comic: ")
     val comicPublisher = readNextLine("Enter the publisher for the comic: ")
@@ -100,7 +101,6 @@ fun addComic() {
         println("Adding comic failed")
     }
 }
-
 
 
 fun listComics() {
@@ -191,8 +191,9 @@ fun soldComic() {
 //ISSUE MENU (only available for available comics)
 //-------------------------------------------
 private fun addIssueToComic() {
-    val comic: Comic? = askUserToChooseAvailableComic()
+    val comic: Comic? = askUserToChooseComic()
     if (comic != null) {
+        val issueNo = readNextInt("\t Enter issue number: ")
         val dateOfPublication = readNextLine("\t Date of Publication: ")
         val rrp = readNextInt("\t RRP: ")
         val currentMarketValue = readNextInt("\t Current Market Value: ")
@@ -200,6 +201,7 @@ private fun addIssueToComic() {
         val condition = readNextLine("\t Condition: ")
 
         val newIssue = Issue(
+            issueNo = issueNo,
             dateOfPublication = dateOfPublication,
             rrp = rrp,
             currentMarketValue = currentMarketValue,
@@ -216,10 +218,11 @@ private fun addIssueToComic() {
 }
 
 fun updateIssueDetailsInComic() {
-    val comic: Comic? = askUserToChooseAvailableComic()
+    val comic: Comic? = askUserToChooseComic()
     if (comic != null) {
         val issue: Issue? = askUserToChooseIssue(comic)
         if (issue != null) {
+            val newIssueNo = readNextInt("Enter new issue number")
             val newDateOfPublication = readNextLine("Enter new Date of Publication: ")
             val newRRP = readNextInt("Enter new RRP: ")
             val newRarity = readNextLine("Enter new Rarity: ")
@@ -228,6 +231,7 @@ fun updateIssueDetailsInComic() {
 
             val updatedIssue = Issue(
                 issueId = issue.issueId,
+                issueNo = newIssueNo,
                 dateOfPublication = newDateOfPublication,
                 rrp = newRRP,
                 currentMarketValue = newCurrentMarketValue,
@@ -247,7 +251,7 @@ fun updateIssueDetailsInComic() {
 }
 
 fun deleteAnIssue() {
-    val comic: Comic? = askUserToChooseAvailableComic()
+    val comic: Comic? = askUserToChooseComic()
     if (comic != null) {
         val issue: Issue? = askUserToChooseIssue(comic)
         if (issue != null) {
@@ -262,7 +266,7 @@ fun deleteAnIssue() {
 }
 
 fun markIssueStatus() {
-    val comic: Comic? = askUserToChooseAvailableComic()
+    val comic: Comic? = askUserToChooseComic()
     if (comic != null) {
         val issue: Issue? = askUserToChooseIssue(comic)
        if (issue != null) {
@@ -327,21 +331,17 @@ fun exitApp() {
 //HELPER FUNCTIONS
 //------------------------------------
 
-private fun askUserToChooseAvailableComic(): Comic? {
-    listAvailableComics()
-    if (comicAPI.numberOfAvailableComics() > 0) {
+private fun askUserToChooseComic(): Comic? {
+    listAllComics()  // Use listAllComics to display all comics
+    if (comicAPI.numberOfComics() > 0) {
         val comic = comicAPI.findComic(readNextInt("\nEnter the id of the comic: "))
         if (comic != null) {
-            if (comic.isComicSold) {
-                println("Comic is NOT Available, it is Sold")
-            } else {
-                return comic //chosen comic is active
-            }
+            return comic
         } else {
             println("Comic id is not valid")
         }
     }
-    return null //selected note is not active
+    return null
 }
 
 private fun askUserToChooseIssue(comic: Comic): Issue? {

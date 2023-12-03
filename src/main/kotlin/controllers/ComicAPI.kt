@@ -61,11 +61,11 @@ class ComicAPI(serializerType: Serializer) {
         else formatListString(comics)
 
     fun listAvailableComics() =
-        if (numberOfAvailableComics() == 0) "No active comics stored"
+        if (numberOfAvailableComics() == 0) "No available comics stored"
         else formatListString(comics.filter { comic -> !comic.isComicSold })
 
     fun listSoldComics() =
-        if (numberOfSoldComics() == 0) "No archived comics stored"
+        if (numberOfSoldComics() == 0) "No sold comics stored"
         else formatListString(comics.filter { comic -> comic.isComicSold })
 
     // ----------------------------------------------
