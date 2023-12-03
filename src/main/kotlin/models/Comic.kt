@@ -11,6 +11,17 @@ data class Comic(
     var isComicSold: Boolean = false,
     var issues: MutableSet<Issue> = mutableSetOf())
 {
+    //Issue with loading occurred using the Notes 5.0 as a base for my assignment, an issue that did not occur
+    //in my final notes app for assignment 2, I would assume this is related to the extra fields and complications
+    //related to different types(boolean, MutableSet) and the amount of fields. Researching the issue I discovered
+    //the problem is fixed from the use of a secondary constructor,so that Jackson could work with all fields.
+    //I have no idea how this works, it's not called, it doesn't appear to be used anywhere, but the saved YAML
+    //file loads perfectly with no errors, and a list appears perfectly with what was saved prior. There were many
+    //resources for this, but this was most relevant in the general sense, allowing it to load as it did in my notes
+    //notes app for assignment 2.
+    //https://stackoverflow.com/questions/23003634/using-this-in-constructor
+    constructor() : this(0, "", "", "", "", false, mutableSetOf())
+
     private var lastIssueId = 0
     private fun getIssueId() = lastIssueId++
 
@@ -58,7 +69,6 @@ data class Comic(
         }
         return true //a note with empty items can be archived, or all items are complete
     }
-
     fun listIssues() =
          if (issues.isEmpty())  "\tNO ITEMS ADDED"
          else  Utilities.formatSetString(issues)
