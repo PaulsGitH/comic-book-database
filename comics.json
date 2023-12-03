@@ -1,1 +1,1 @@
-{"object-stream":{"list":[{"models.Comic":{"comicId":0,"comicTitle":"dcsdvdsv","comicWriter":"dcsdc","comicArtist":"scddscd","comicPublisher":"cdscds","isComicSold":false,"issues":[{"@class":"linked-hash-set","models.Issue":{"issueId":0,"dateOfPublication":"xaxs","rrp":434,"currentMarketValue":3434,"rarity":"cdscd","condition":"cscd","isIssueDocumented":false}}],"lastIssueId":1}}]}}
+{"object-stream":{"list":[""]}}

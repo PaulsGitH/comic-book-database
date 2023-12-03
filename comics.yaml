@@ -1,15 +1,22 @@
 ---
 - comicId: 0
-  comicTitle: "csdscsdc"
-  comicWriter: "dcscdscd"
-  comicArtist: "dcscd"
-  comicPublisher: "dscsdc"
-  issues:
-  - issueId: 0
-    dateOfPublication: "vwrwfw"
-    rrp: 434
-    currentMarketValue: 3434
-    rarity: "sdfsdf"
-    condition: "gsg"
-    issueDocumented: false
+  comicTitle: "Test App"
+  comicWriter: "Writer1"
+  comicArtist: "Artist1"
+  comicPublisher: "Publisher1"
+  issues: []
+  comicSold: false
+- comicId: 1
+  comicTitle: "Swim - Pool"
+  comicWriter: "Writer2"
+  comicArtist: "Artist2"
+  comicPublisher: "Publisher2"
+  issues: []
+  comicSold: true
+- comicId: 2
+  comicTitle: "Summer Holiday"
+  comicWriter: "Writer3"
+  comicArtist: "Artist3"
+  comicPublisher: "Publisher3"
+  issues: []
   comicSold: false
