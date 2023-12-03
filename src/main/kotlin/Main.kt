@@ -30,7 +30,7 @@ fun runMenu() {
             8 -> updateIssueDetailsInComic()
             9 -> deleteAnIssue()
             10 -> markIssueStatus()
-            11 -> searchComicsByTitle()
+            11 -> searchComics()
             12 -> save()
             13 -> load()
             14 -> searchIssues()
@@ -126,7 +126,30 @@ fun listComics() {
     }
 }
 
+fun searchComics() {
+    if (comicAPI.numberOfComics() > 0) {
+        val option = readNextInt(
+            """
+                  > --------------------------------
+                  > |   1) Search comic by title   |
+                  > |   2) Search comic by writer  |
+                  > |   3) Search comic by artist  |
+                  > |   4) Search comic by publisher|
+                  > --------------------------------
+         > ==>> """.trimMargin(">")
+        )
 
+        when (option) {
+            1 -> searchComicsByTitle()
+            2 -> searchComicsByWriter()
+            3 -> searchComicsByArtist()
+            4 -> searchComicsByPublisher()
+            else -> println("Invalid option entered: $option")
+        }
+    } else {
+        println("Option Invalid - No notes stored")
+    }
+}
 
 fun listAllComics() = println(comicAPI.listAllComics())
 fun listAvailableComics() = println(comicAPI.listAvailableComics())
