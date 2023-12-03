@@ -35,6 +35,7 @@ fun runMenu() {
             13 -> load()
             14 -> searchIssues()
             15 -> listInspectIssues()
+            16 -> countTotalComics()
             0 -> exitApp()
             else -> println("Invalid menu choice: $option")
         }
@@ -177,6 +178,7 @@ fun searchIssues() {
 fun listAllComics() = println(comicAPI.listAllComics())
 fun listAvailableComics() = println(comicAPI.listAvailableComics())
 fun listSoldComics() = println(comicAPI.listSoldComics())
+fun countTotalComics() = println(comicAPI.comicTotal())
 
 fun updateComic() {
     listComics()

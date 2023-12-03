@@ -149,6 +149,9 @@ class ComicAPI(serializerType: Serializer) {
         }
     }
 
+    fun comicTotal(): Int {
+        return comics.size
+    }
     // ----------------------------------------------
     //  LISTING METHODS FOR ITEMS
     // ----------------------------------------------
