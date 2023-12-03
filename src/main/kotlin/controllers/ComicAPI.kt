@@ -61,7 +61,7 @@ class ComicAPI(serializerType: Serializer) {
     fun listAllComics() =
         if (comics.isEmpty()) "No comics stored"
         else formatListString(comics)
-    
+
 
     fun listAvailableComics() =
         if (numberOfAvailableComics() == 0) "No available comics stored"
@@ -88,6 +88,21 @@ class ComicAPI(serializerType: Serializer) {
             comics.filter { comic -> comic.comicTitle.contains(searchString, ignoreCase = true) }
         )
 
+    fun searchComicsByWriter(searchString: String) =
+        formatListString(
+            comics.filter { comic -> comic.comicWriter.contains(searchString, ignoreCase = true) }
+        )
+
+    fun searchComicsByArtist(searchString: String) =
+        formatListString(
+            comics.filter { comic -> comic.comicArtist.contains(searchString, ignoreCase = true) }
+        )
+
+    fun searchComicsByPublisher(searchString: String) =
+        formatListString(
+            comics.filter { comic -> comic.comicPublisher.contains(searchString, ignoreCase = true) }
+        )
+
     fun searchIssueByRarity(searchString: String): String {
         return if (numberOfComics() == 0) "No comics stored"
         else {
@@ -95,6 +110,36 @@ class ComicAPI(serializerType: Serializer) {
             for (comic in comics) {
                 for (issue in comic.issues) {
                     if (issue.rarity.contains(searchString, ignoreCase = true)) {
+                        listOfComics += "${comic.comicId}: ${comic.comicTitle} \n\t${issue}\n"
+                    }
+                }
+            }
+            if (listOfComics == "") "No items found for: $searchString"
+            else listOfComics
+        }
+    }
+    fun searchIssueByCondition(searchString: String): String {
+        return if (numberOfComics() == 0) "No comics stored"
+        else {
+            var listOfComics = ""
+            for (comic in comics) {
+                for (issue in comic.issues) {
+                    if (issue.condition.contains(searchString, ignoreCase = true)) {
+                        listOfComics += "${comic.comicId}: ${comic.comicTitle} \n\t${issue}\n"
+                    }
+                }
+            }
+            if (listOfComics == "") "No items found for: $searchString"
+            else listOfComics
+        }
+    }
+    fun searchIssueByDateOfPublication(searchString: String): String {
+        return if (numberOfComics() == 0) "No comics stored"
+        else {
+            var listOfComics = ""
+            for (comic in comics) {
+                for (issue in comic.issues) {
+                    if (issue.dateOfPublication.contains(searchString, ignoreCase = true)) {
                         listOfComics += "${comic.comicId}: ${comic.comicTitle} \n\t${issue}\n"
                     }
                 }
