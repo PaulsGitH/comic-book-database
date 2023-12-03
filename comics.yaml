@@ -1,8 +1,15 @@
 ---
 - comicId: 0
-  comicTitle: "Spider-man"
-  comicWriter: "Stan Lee"
-  comicArtist: "Steve DitKo"
-  comicPublisher: "Marvel"
-  issues: []
+  comicTitle: "csdscsdc"
+  comicWriter: "dcscdscd"
+  comicArtist: "dcscd"
+  comicPublisher: "dscsdc"
+  issues:
+  - issueId: 0
+    dateOfPublication: "vwrwfw"
+    rrp: 434
+    currentMarketValue: 3434
+    rarity: "sdfsdf"
+    condition: "gsg"
+    issueDocumented: false
   comicSold: false
