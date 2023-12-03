@@ -1,12 +1,20 @@
 import controllers.ComicAPI
 import models.Issue
 import models.Comic
+import mu.KotlinLogging
+import persistence.JSONSerializer
+import persistence.XMLSerializer
+import persistence.YAMLSerializer
 import utils.ScannerInput.readNextChar
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
+import java.io.File
 import kotlin.system.exitProcess
 
-private val comicAPI = ComicAPI()
+//private val comicAPI = ComicAPI(XMLSerializer(File("comics.xml")))
+//private val comicAPI = ComicAPI(JSONSerializer(File("comics.json")))
+private val comicAPI = ComicAPI(YAMLSerializer(File("comics.yaml")))
+private val logger = KotlinLogging.logger {}
 
 fun main() = runMenu()
 
@@ -23,6 +31,8 @@ fun runMenu() {
             8 -> deleteAnIssue()
             9 -> markIssueStatus()
             10 -> searchComics()
+            11 -> save()
+            12 -> load()
             15 -> searchIssues()
             16 -> listInspectIssues()
             0 -> exitApp()
@@ -37,7 +47,7 @@ fun mainMenu() = readNextInt(
          > |                  NOTE KEEPER APP                  |
          > -----------------------------------------------------  
          > | NOTE MENU                                         |
-         > |   1) Add a note                                   |
+         > |   1) Add a comic                                  |
          > |   2) List notes                                   |
          > |   3) Update a note                                |
          > |   4) Delete a note                                |
@@ -51,8 +61,8 @@ fun mainMenu() = readNextInt(
          > -----------------------------------------------------  
          > | REPORT MENU FOR NOTES                             | 
          > |   10) Search for all notes (by note title)        |
-         > |   11) .....                                       |
-         > |   12) .....                                       |
+         > |   11) Save stored information for comic and issue |
+         > |   12) Load stored information for comic and issue |
          > |   13) .....                                       |
          > |   14) .....                                       |
          > -----------------------------------------------------  
@@ -340,5 +350,21 @@ private fun askUserToChooseIssue(comic: Comic): Issue? {
     else{
         println ("No issue details for chosen comic")
         return null
+    }
+}
+
+fun save() {
+    try {
+        comicAPI.store()
+    } catch (e: Exception) {
+        System.err.println("Error writing to file: $e")
+    }
+}
+
+fun load() {
+    try {
+        comicAPI.load()
+    } catch (e: Exception) {
+        System.err.println("Error reading from file: $e")
     }
 }

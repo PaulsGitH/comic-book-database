@@ -1,0 +1,14 @@
+<object-stream>
+  <list>
+    <models.Comic>
+      <comicId>0</comicId>
+      <comicTitle>Spider-man</comicTitle>
+      <comicWriter>stan lee</comicWriter>
+      <comicArtist>steve ditko</comicArtist>
+      <comicPublisher>marvel</comicPublisher>
+      <isComicSold>false</isComicSold>
+      <issues class="linked-hash-set"/>
+      <lastIssueId>0</lastIssueId>
+    </models.Comic>
+  </list>
+</object-stream>

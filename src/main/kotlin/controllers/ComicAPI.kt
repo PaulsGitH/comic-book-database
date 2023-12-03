@@ -1,10 +1,13 @@
 package controllers
 
 import models.Comic
+import persistence.Serializer
 import utils.Utilities.formatListString
 import java.util.ArrayList
 
-class ComicAPI() {
+class ComicAPI(serializerType: Serializer) {
+
+    private var serializer: Serializer = serializerType
 
     private var comics = ArrayList<Comic>()
 
@@ -50,7 +53,6 @@ class ComicAPI() {
         }
         return false
     }
-
     // ----------------------------------------------
     //  LISTING METHODS FOR NOTE ArrayList
     // ----------------------------------------------
@@ -129,6 +131,16 @@ class ComicAPI() {
             }
         }
         return numberOfInspectIssues
+    }
+
+    @Throws(Exception::class)
+    fun load() {
+        comics = serializer.read() as ArrayList<Comic>
+    }
+
+    @Throws(Exception::class)
+    fun store() {
+        serializer.write(comics)
     }
 
 }

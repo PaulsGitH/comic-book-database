@@ -1,0 +1,8 @@
+---
+- comicId: 0
+  comicTitle: "Spider-man"
+  comicWriter: "Stan Lee"
+  comicArtist: "Steve DitKo"
+  comicPublisher: "Marvel"
+  issues: []
+  comicSold: false
