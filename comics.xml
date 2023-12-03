@@ -2,34 +2,33 @@
   <list>
     <models.Comic>
       <comicId>0</comicId>
-      <comicTitle>Amazing Spider-Man</comicTitle>
-      <comicWriter>Stan Lee</comicWriter>
-      <comicArtist>Steve Ditko</comicArtist>
-      <comicPublisher>Marvel</comicPublisher>
+      <comicTitle>Test App</comicTitle>
+      <comicWriter>Writer1</comicWriter>
+      <comicArtist>Artist1</comicArtist>
+      <comicPublisher>Publisher1</comicPublisher>
       <isComicSold>false</isComicSold>
-      <issues class="linked-hash-set">
-        <models.Issue>
-          <issueId>0</issueId>
-          <issueNo>3</issueNo>
-          <dateOfPublication>12/04/1970</dateOfPublication>
-          <rrp>332</rrp>
-          <currentMarketValue>23234</currentMarketValue>
-          <rarity>Highly rare</rarity>
-          <condition>Good</condition>
-          <isIssueDocumented>false</isIssueDocumented>
-        </models.Issue>
-        <models.Issue>
-          <issueId>1</issueId>
-          <issueNo>5</issueNo>
-          <dateOfPublication>30/01/71</dateOfPublication>
-          <rrp>3234</rrp>
-          <currentMarketValue>434423</currentMarketValue>
-          <rarity>Common</rarity>
-          <condition>Poor</condition>
-          <isIssueDocumented>false</isIssueDocumented>
-        </models.Issue>
-      </issues>
-      <lastIssueId>2</lastIssueId>
+      <issues class="linked-hash-set"/>
+      <lastIssueId>0</lastIssueId>
+    </models.Comic>
+    <models.Comic>
+      <comicId>1</comicId>
+      <comicTitle>Swim - Pool</comicTitle>
+      <comicWriter>Writer2</comicWriter>
+      <comicArtist>Artist2</comicArtist>
+      <comicPublisher>Publisher2</comicPublisher>
+      <isComicSold>true</isComicSold>
+      <issues class="linked-hash-set"/>
+      <lastIssueId>0</lastIssueId>
+    </models.Comic>
+    <models.Comic>
+      <comicId>2</comicId>
+      <comicTitle>Summer Holiday</comicTitle>
+      <comicWriter>Writer3</comicWriter>
+      <comicArtist>Artist3</comicArtist>
+      <comicPublisher>Publisher3</comicPublisher>
+      <isComicSold>false</isComicSold>
+      <issues class="linked-hash-set"/>
+      <lastIssueId>0</lastIssueId>
     </models.Comic>
   </list>
 </object-stream>
