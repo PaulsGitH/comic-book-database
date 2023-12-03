@@ -118,6 +118,36 @@ class ComicAPI(serializerType: Serializer) {
             else listOfComics
         }
     }
+    fun searchIssueByCondition(searchString: String): String {
+        return if (numberOfComics() == 0) "No comics stored"
+        else {
+            var listOfComics = ""
+            for (comic in comics) {
+                for (issue in comic.issues) {
+                    if (issue.condition.contains(searchString, ignoreCase = true)) {
+                        listOfComics += "${comic.comicId}: ${comic.comicTitle} \n\t${issue}\n"
+                    }
+                }
+            }
+            if (listOfComics == "") "No items found for: $searchString"
+            else listOfComics
+        }
+    }
+    fun searchIssueByDateOfPublication(searchString: String): String {
+        return if (numberOfComics() == 0) "No comics stored"
+        else {
+            var listOfComics = ""
+            for (comic in comics) {
+                for (issue in comic.issues) {
+                    if (issue.dateOfPublication.contains(searchString, ignoreCase = true)) {
+                        listOfComics += "${comic.comicId}: ${comic.comicTitle} \n\t${issue}\n"
+                    }
+                }
+            }
+            if (listOfComics == "") "No items found for: $searchString"
+            else listOfComics
+        }
+    }
 
     // ----------------------------------------------
     //  LISTING METHODS FOR ITEMS
