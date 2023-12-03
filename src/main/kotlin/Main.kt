@@ -84,6 +84,7 @@ fun mainMenu() = readNextInt(
 //NOTE MENU
 //------------------------------------
 fun addComic() {
+    logger.info { "addComic() function invoked" }
     val comicTitle = readNextLine("Enter Comic series title: ")
     val comicWriter = readNextLine("Enter the writer for the comic: ")
     val comicArtist = readNextLine("Enter the artist for the comic: ")
@@ -105,6 +106,7 @@ fun addComic() {
 
 
 fun listComics() {
+    logger.info { "listComics() function invoked" }
     if (comicAPI.numberOfComics() > 0) {
         val option = readNextInt(
             """
@@ -128,6 +130,7 @@ fun listComics() {
 }
 
 fun searchComics() {
+    logger.info { "searchComics() function invoked" }
     if (comicAPI.numberOfComics() > 0) {
         val option = readNextInt(
             """
@@ -153,6 +156,7 @@ fun searchComics() {
 }
 
 fun searchIssues() {
+    logger.info { "searchIssues() function invoked" }
     if (comicAPI.numberOfComics() > 0) {
         val option = readNextInt(
             """
@@ -181,6 +185,7 @@ fun listSoldComics() = println(comicAPI.listSoldComics())
 fun countTotalComics() = println(comicAPI.comicTotal())
 
 fun updateComic() {
+    logger.info { "updateComic() function invoked" }
     listComics()
     if (comicAPI.numberOfComics() > 0) {
         // only ask the user to choose the comic if comics exist
@@ -209,6 +214,7 @@ fun updateComic() {
 }
 
 fun deleteComic() {
+    logger.info { "deleteComic() function invoked" }
     listComics()
     if (comicAPI.numberOfComics() > 0) {
         // only ask the user to choose the comic to delete if comic exists
@@ -224,6 +230,7 @@ fun deleteComic() {
 }
 
 fun soldComic() {
+    logger.info { "soldComic() function invoked" }
     listAvailableComics()
     if (comicAPI.numberOfAvailableComics() > 0) {
         // only ask the user to mark the comic as sold if available comic exists
@@ -241,6 +248,7 @@ fun soldComic() {
 //ISSUE MENU (only available for available comics)
 //-------------------------------------------
 private fun addIssueToComic() {
+    logger.info { "addIssueToComic() function invoked" }
     val comic: Comic? = askUserToChooseComic()
     if (comic != null) {
         val issueNo = readNextInt("\t Enter issue number: ")
@@ -268,6 +276,7 @@ private fun addIssueToComic() {
 }
 
 fun updateIssueDetailsInComic() {
+    logger.info { "updateIssueDetailsInComic() function invoked" }
     val comic: Comic? = askUserToChooseComic()
     if (comic != null) {
         val issue: Issue? = askUserToChooseIssue(comic)
@@ -301,6 +310,7 @@ fun updateIssueDetailsInComic() {
 }
 
 fun deleteAnIssue() {
+    logger.info { "deleteAnIssue() function invoked" }
     val comic: Comic? = askUserToChooseComic()
     if (comic != null) {
         val issue: Issue? = askUserToChooseIssue(comic)
@@ -316,6 +326,7 @@ fun deleteAnIssue() {
 }
 
 fun markIssueStatus() {
+    logger.info { "markIssueStatus() function invoked" }
     val comic: Comic? = askUserToChooseComic()
     if (comic != null) {
         val issue: Issue? = askUserToChooseIssue(comic)
@@ -339,6 +350,7 @@ fun markIssueStatus() {
 //NOTE REPORTS MENU
 //------------------------------------
 fun searchComicsByTitle() {
+    logger.info { "searchComicsByTitle() function invoked" }
     val searchTitle = readNextLine("Enter the description to search by: ")
     val searchResults = comicAPI.searchComicsByTitle(searchTitle)
     if (searchResults.isEmpty()) {
@@ -348,6 +360,7 @@ fun searchComicsByTitle() {
     }
 }
 fun searchComicsByWriter() {
+    logger.info { "searchComicsByWriter() function invoked" }
     val searchWriter = readNextLine("Enter the Writer to search by: ")
     val searchResults = comicAPI.searchComicsByWriter(searchWriter)
     if (searchResults.isEmpty()) {
@@ -357,6 +370,7 @@ fun searchComicsByWriter() {
     }
 }
 fun searchComicsByArtist() {
+    logger.info { "searchComicsByArtist() function invoked" }
     val searchArtist = readNextLine("Enter the Artist to search by: ")
     val searchResults = comicAPI.searchComicsByArtist(searchArtist)
     if (searchResults.isEmpty()) {
@@ -367,6 +381,7 @@ fun searchComicsByArtist() {
 }
 
 fun searchComicsByPublisher() {
+    logger.info { "searchComicByPublisher() function invoked" }
     val searchPublisher = readNextLine("Enter the Publisher to search by: ")
     val searchResults = comicAPI.searchComicsByPublisher(searchPublisher)
     if (searchResults.isEmpty()) {
@@ -379,6 +394,7 @@ fun searchComicsByPublisher() {
 //ITEM REPORTS MENU
 //------------------------------------
 fun searchIssueByRarity() {
+    logger.info { "searchIssueByRarity() function invoked" }
     val searchDetails = readNextLine("Enter the issue rarity to search by: ")
     val searchResults = comicAPI.searchIssueByRarity(searchDetails)
     if (searchResults.isEmpty()) {
@@ -389,6 +405,7 @@ fun searchIssueByRarity() {
 }
 
 fun searchIssueByCondition() {
+    logger.info { "searchIssueByCondition() function invoked" }
     val searchDetails = readNextLine("Enter the issue condition to search by: ")
     val searchResults = comicAPI.searchIssueByCondition(searchDetails)
     if (searchResults.isEmpty()) {
@@ -399,6 +416,7 @@ fun searchIssueByCondition() {
 }
 
 fun searchIssueByDateOfPublication() {
+    logger.info { "searchIssueByDateOfPublication() function invoked" }
     val searchDetails = readNextLine("Enter the issue contents to search by: ")
     val searchResults = comicAPI.searchIssueByDateOfPublication(searchDetails)
     if (searchResults.isEmpty()) {
@@ -409,6 +427,7 @@ fun searchIssueByDateOfPublication() {
 }
 
 fun listInspectIssues(){
+    logger.info { "listInspectIssues() function invoked" }
     if (comicAPI.numberOfInspectIssues() > 0) {
         println("Total Issues requiring condition inspection: ${comicAPI.numberOfInspectIssues()}")
     }
@@ -420,6 +439,7 @@ fun listInspectIssues(){
 // Exit App
 //------------------------------------
 fun exitApp() {
+    logger.info { "exitApp() function invoked" }
     println("Exiting...bye")
     exitProcess(0)
 }
@@ -429,6 +449,7 @@ fun exitApp() {
 //------------------------------------
 
 private fun askUserToChooseComic(): Comic? {
+    logger.info { "askUserToChooseComic() function invoked" }
     listAllComics()  // Use listAllComics to display all comics
     if (comicAPI.numberOfComics() > 0) {
         val comic = comicAPI.findComic(readNextInt("\nEnter the id of the comic: "))
@@ -442,6 +463,7 @@ private fun askUserToChooseComic(): Comic? {
 }
 
 private fun askUserToChooseIssue(comic: Comic): Issue? {
+    logger.info { "askUserToChooseIssue() function invoked" }
     if (comic.numberOfIssues() > 0) {
         print(comic.listIssues())
         return comic.findOne(readNextInt("\nEnter the id of the issue: "))
@@ -453,6 +475,7 @@ private fun askUserToChooseIssue(comic: Comic): Issue? {
 }
 
 fun save() {
+    logger.info { "save() function invoked" }
     try {
         comicAPI.store()
     } catch (e: Exception) {
@@ -461,6 +484,7 @@ fun save() {
 }
 
 fun load() {
+    logger.info { "load() function invoked" }
     try {
         comicAPI.load()
     } catch (e: Exception) {
