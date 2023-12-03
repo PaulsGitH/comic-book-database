@@ -101,6 +101,8 @@ fun addComic() {
     }
 }
 
+
+
 fun listComics() {
     if (comicAPI.numberOfComics() > 0) {
         val option = readNextInt(
@@ -174,7 +176,7 @@ fun deleteComic() {
 fun soldComic() {
     listAvailableComics()
     if (comicAPI.numberOfAvailableComics() > 0) {
-        // only ask the user to choose the note to archive if active notes exist
+        // only ask the user to mark the comic as sold if available comic exists
         val id = readNextInt("Enter the id of the sold comic to be archived: ")
         // pass the index of the comic to comicAPI for archiving and check for success.
         if (comicAPI.soldComic(id)) {
