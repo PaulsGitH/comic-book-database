@@ -1,7 +1,9 @@
 package controllers
 
 import models.Comic
+import models.Issue
 import persistence.Serializer
+import utils.Utilities
 import utils.Utilities.formatListString
 import java.util.ArrayList
 
@@ -59,6 +61,7 @@ class ComicAPI(serializerType: Serializer) {
     fun listAllComics() =
         if (comics.isEmpty()) "No comics stored"
         else formatListString(comics)
+    
 
     fun listAvailableComics() =
         if (numberOfAvailableComics() == 0) "No available comics stored"

@@ -14,7 +14,7 @@ object Utilities {
             .joinToString(separator = "\n") { comic ->  "$comic" }
 
     @JvmStatic
-    fun formatSetString(itemsToFormat: Set<Issue>): String =
+    fun formatSetString(itemsToFormat: MutableSet<Issue>): String =
         itemsToFormat
             .joinToString(separator = "\n") { issue ->  "\t$issue" }
 

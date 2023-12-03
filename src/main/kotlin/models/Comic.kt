@@ -17,7 +17,7 @@ data class Comic(
     //the problem is fixed from the use of a secondary constructor,so that Jackson could work with all fields.
     //I have no idea how this works, it's not called, it doesn't appear to be used anywhere, but the saved YAML
     //file loads perfectly with no errors, and a list appears perfectly with what was saved prior. There were many
-    //resources for this, but this was most relevant in the general sense, allowing it to load as it did in my notes
+    //resources for this, but this was most relevant in the general sense, allowing it to load as it did in my
     //notes app for assignment 2.
     //https://stackoverflow.com/questions/23003634/using-this-in-constructor
     constructor() : this(0, "", "", "", "", false, mutableSetOf())
