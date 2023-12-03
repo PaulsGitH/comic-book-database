@@ -156,10 +156,9 @@ fun searchIssues() {
         val option = readNextInt(
             """
                   > --------------------------------
-                  > |   1) Search comic by title   |
-                  > |   2) Search comic by writer  |
-                  > |   3) Search comic by artist  |
-                  > |   4) Search comic by publisher|
+                  > |   1) Search Issue by rarity  |
+                  > |   2) Search Issue by condition|
+                  > |   3) Search Issue by pub date|
                   > --------------------------------
          > ==>> """.trimMargin(">")
         )
