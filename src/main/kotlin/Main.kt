@@ -30,7 +30,7 @@ fun runMenu() {
             8 -> updateIssueDetailsInComic()
             9 -> deleteAnIssue()
             10 -> markIssueStatus()
-            11 -> searchComics()
+            11 -> searchComicsByTitle()
             12 -> save()
             13 -> load()
             14 -> searchIssues()
@@ -125,6 +125,8 @@ fun listComics() {
         println("Option Invalid - No notes stored")
     }
 }
+
+
 
 fun listAllComics() = println(comicAPI.listAllComics())
 fun listAvailableComics() = println(comicAPI.listAvailableComics())
@@ -288,7 +290,7 @@ fun markIssueStatus() {
 //------------------------------------
 //NOTE REPORTS MENU
 //------------------------------------
-fun searchComics() {
+fun searchComicsByTitle() {
     val searchTitle = readNextLine("Enter the description to search by: ")
     val searchResults = comicAPI.searchComicsByTitle(searchTitle)
     if (searchResults.isEmpty()) {
@@ -297,7 +299,34 @@ fun searchComics() {
         println(searchResults)
     }
 }
+fun searchComicsByWriter() {
+    val searchWriter = readNextLine("Enter the Writer to search by: ")
+    val searchResults = comicAPI.searchComicsByWriter(searchWriter)
+    if (searchResults.isEmpty()) {
+        println("No Writer found")
+    } else {
+        println(searchResults)
+    }
+}
+fun searchComicsByArtist() {
+    val searchArtist = readNextLine("Enter the Artist to search by: ")
+    val searchResults = comicAPI.searchComicsByArtist(searchArtist)
+    if (searchResults.isEmpty()) {
+        println("No artist found")
+    } else {
+        println(searchResults)
+    }
+}
 
+fun searchComicsByPublisher() {
+    val searchPublisher = readNextLine("Enter the Publisher to search by: ")
+    val searchResults = comicAPI.searchComicsByWriter(searchPublisher)
+    if (searchResults.isEmpty()) {
+        println("No Publisher found")
+    } else {
+        println(searchResults)
+    }
+}
 //------------------------------------
 //ITEM REPORTS MENU
 //------------------------------------

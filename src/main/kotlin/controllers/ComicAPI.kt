@@ -61,7 +61,7 @@ class ComicAPI(serializerType: Serializer) {
     fun listAllComics() =
         if (comics.isEmpty()) "No comics stored"
         else formatListString(comics)
-    
+
 
     fun listAvailableComics() =
         if (numberOfAvailableComics() == 0) "No available comics stored"
@@ -86,6 +86,21 @@ class ComicAPI(serializerType: Serializer) {
     fun searchComicsByTitle(searchString: String) =
        formatListString(
             comics.filter { comic -> comic.comicTitle.contains(searchString, ignoreCase = true) }
+        )
+
+    fun searchComicsByWriter(searchString: String) =
+        formatListString(
+            comics.filter { comic -> comic.comicWriter.contains(searchString, ignoreCase = true) }
+        )
+
+    fun searchComicsByArtist(searchString: String) =
+        formatListString(
+            comics.filter { comic -> comic.comicArtist.contains(searchString, ignoreCase = true) }
+        )
+
+    fun searchComicsByPublisher(searchString: String) =
+        formatListString(
+            comics.filter { comic -> comic.comicPublisher.contains(searchString, ignoreCase = true) }
         )
 
     fun searchIssueByRarity(searchString: String): String {
