@@ -22,20 +22,20 @@ fun runMenu() {
     do {
         when (val option = mainMenu()) {
             1 -> addComic()
-            3 -> listComics()
-            4 -> updateComic()
-            5 -> deleteComic()
-            6 -> soldComic()
+            2 -> listComics()
+            3 -> updateComic()
+            4 -> deleteComic()
+            5 -> soldComic()
+            6 -> searchComics()
             7 -> addIssueToComic()
             8 -> updateIssueDetailsInComic()
             9 -> deleteAnIssue()
             10 -> markIssueStatus()
-            11 -> searchComics()
-            12 -> save()
-            13 -> load()
-            14 -> searchIssues()
-            15 -> listInspectIssues()
-            16 -> countTotalComics()
+            11 -> searchIssues()
+            12 -> listInspectIssues()
+            13 -> countTotalComics()
+            14 -> save()
+            15 -> load()
             0 -> exitApp()
             else -> println("Invalid menu choice: $option")
         }
@@ -45,35 +45,34 @@ fun runMenu() {
 fun mainMenu() = readNextInt(
         """ 
          > -----------------------------------------------------  
-         > |                  NOTE KEEPER APP                  |
+         > |      ####     ####    ##   ##   ####     ####     |
+         > |     ##  ##   ##  ##   ### ###    ##     ##  ##    |
+         > |     ##       ##  ##   #######    ##     ##        |
+         > |     ##       ##  ##   ## # ##    ##     ##        |
+         > |     ##       ##  ##   ##   ##    ##     ##        |
+         > |     ##  ##   ##  ##   ##   ##    ##     ##  ##    |
+         > |      ####     ####    ##   ##   ####     ####     |
          > -----------------------------------------------------  
-         > | NOTE MENU                                         |
-         > |   1) Add a comic                                  |
-         > |   2) Add Available comic                          |
-         > |   3) List notes                                   |
-         > |   4) Update a note                                |
-         > |   5) Delete a note                                |
-         > |   6) Archive a note                               |
+         > | COMIC MENU                                        |
+         > |   1) Add a comic series                           |
+         > |   2) List comic menu                              |
+         > |   3) Update a Comic series                        |
+         > |   4) Delete a Comic                               |
+         > |   5) Archive a Comic as sold                      |
+         > |   6) Search Comic submenu                         |
          > -----------------------------------------------------  
-         > | ITEM MENU                                         | 
-         > |   7) Add item to a note                           |
-         > |   8) Update item contents on a note               |
-         > |   9) Delete item from a note                      |
-         > |   10) Mark item as complete/todo                  | 
+         > | ISSUE MENU                                        | 
+         > |   7) Add issue to a comic series                  |
+         > |   8) Update issue details on a Comic series       |
+         > |   9) Delete Issue from a Comic series             |
+         > |   10) Mark Issue status                           |
+         > |   11) Search Issue submenu                        |
+         >     12) List Inspect issues                         |
          > -----------------------------------------------------  
-         > | REPORT MENU FOR NOTES                             | 
-         > |   11) Search for all notes (by note title)        |
-         > |   12) Save stored information for comic and issue |
-         > |   13) Load stored information for comic and issue |
-         > |   13) .....                                       |
-         > |   14) .....                                       |
-         > -----------------------------------------------------  
-         > | REPORT MENU FOR ITEMS                             |                                
-         > |   15) Search for all items (by item description)  |
-         > |   16) List TODO Items                             |
-         > |   17) .....                                       |
-         > |   18) .....                                       |
-         > |   19) .....                                       |
+         > | SAVE AND LOAD MENU                                | 
+         > |   13) Count total comics                          |
+         > |   14) Save stored information for comic and issue |
+         > |   15) Load stored information for comic and issue |
          > -----------------------------------------------------  
          > |   0) Exit                                         |
          > -----------------------------------------------------  
@@ -111,17 +110,15 @@ fun listComics() {
         val option = readNextInt(
             """
                   > --------------------------------
-                  > |   1) View ALL notes          |
-                  > |   2) View ACTIVE notes       |
-                  > |   3) View ARCHIVED notes     |
+                  > |   1) List All comics         |
+                  > |   2) List sold comics        |
                   > --------------------------------
          > ==>> """.trimMargin(">")
         )
 
         when (option) {
             1 -> listAllComics()
-            2 -> listAvailableComics()
-            3 -> listSoldComics()
+            2 -> listSoldComics()
             else -> println("Invalid option entered: $option")
         }
     } else {
